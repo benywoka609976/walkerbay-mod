@@ -16,15 +16,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Configuration -->
+    <!-- Configuration with CSS Variables -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        deepBlue: '#002B5B',
+                        deepBlue: 'var(--color-primary)',
                         softWhite: '#F3F4F6',
-                        accentGold: '#C5A059',
+                        accentGold: 'var(--color-accent)',
                         glass: 'rgba(255, 255, 255, 0.1)',
                     },
                     fontFamily: {
@@ -37,14 +37,78 @@
     </script>
 
     <style>
-        /* --- Artistic Utilities --- */
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            /* Default: Royal */
+            --color-primary: #002B5B; 
+            --color-accent: #C5A059;
+        }
+
+        [data-theme="midnight"] {
+            /* Dark / Silver */
+            --color-primary: #0f172a;
+            --color-accent: #38bdf8;
+        }
+
+        [data-theme="ocean"] {
+            /* Teal / Yellow */
+            --color-primary: #115e59;
+            --color-accent: #fcd34d;
+        }
+
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* --- 2. ARTISTIC BUTTON STYLES --- */
+        .btn-artistic {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        /* The sliding background effect */
+        .btn-artistic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--color-accent);
+            transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: -1;
+        }
+
+        .btn-artistic:hover::before {
+            left: 0;
+        }
+
+        .btn-artistic:hover {
+            color: var(--color-primary) !important;
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);
+        }
+
+        /* --- 3. FLOATING ELEMENTS --- */
+        .floating-fab {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+        }
+
+        /* --- 4. UTILITIES --- */
         .text-vertical {
             writing-mode: vertical-rl;
             text-orientation: mixed;
             transform: rotate(180deg);
         }
         
-        /* Animations */
         .reveal-up {
             opacity: 0;
             transform: translateY(60px);
@@ -59,7 +123,6 @@
         .image-hover-zoom img { transition: transform 1.5s ease; }
         .image-hover-zoom:hover img { transform: scale(1.15); }
 
-        /* Watermark Text */
         .watermark {
             position: absolute;
             font-family: 'Cormorant Garamond', serif;
@@ -70,9 +133,27 @@
             pointer-events: none;
             white-space: nowrap;
         }
+
+        /* Modal */
+        #booking-modal.hidden-modal { opacity: 0; visibility: hidden; pointer-events: none; }
+        #booking-modal.visible-modal { opacity: 1; visibility: visible; pointer-events: auto; }
+        #booking-modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
     </style>
 </head>
-<body class="bg-softWhite text-gray-800 antialiased overflow-x-hidden">
+<body class="bg-softWhite text-gray-800 antialiased overflow-x-hidden" data-theme="royal">
+
+    <!-- FLOATING THEME SWITCHER -->
+    <div class="fixed top-1/2 right-0 transform -translate-y-1/2 z-[60] flex flex-col gap-2 p-2">
+        <button onclick="toggleTheme()" class="w-12 h-12 bg-white shadow-xl rounded-l-full flex items-center justify-center text-deepBlue hover:text-accentGold transition group relative overflow-hidden" title="Switch Theme">
+            <div class="absolute inset-0 bg-deepBlue w-0 group-hover:w-full transition-all duration-300"></div>
+            <i class="fas fa-palette text-xl relative z-10 group-hover:text-white transition"></i>
+        </button>
+    </div>
+
+    <!-- FLOATING CALL BUTTON (Mobile/Desktop) -->
+    <a href="tel:+254700346672" class="fixed bottom-6 right-6 z-[60] w-16 h-16 bg-accentGold rounded-full flex items-center justify-center text-white shadow-2xl floating-fab hover:scale-110 transition duration-300">
+        <i class="fas fa-phone-alt text-2xl"></i>
+    </a>
 
     <!-- Fixed Vertical Navigation (Desktop) -->
     <div class="hidden lg:flex fixed left-0 top-0 h-full w-20 flex-col justify-between items-center py-10 z-50 border-r border-gray-200 bg-white/80 backdrop-blur-md">
@@ -91,23 +172,23 @@
     <!-- Mobile Header -->
     <nav class="lg:hidden fixed w-full z-50 bg-white/90 backdrop-blur shadow-sm py-4 px-6 flex justify-between items-center">
         <span class="font-serif text-2xl font-bold text-deepBlue">Walkerbay</span>
-        <a href="https://wa.me/254700346672" class="bg-deepBlue text-white px-4 py-2 text-xs uppercase tracking-widest">Book</a>
+        <div class="flex gap-2">
+            <a href="tel:+254700346672" class="bg-accentGold text-white px-3 py-2 text-xs uppercase"><i class="fas fa-phone"></i></a>
+            <button onclick="openModal()" class="bg-deepBlue text-white px-4 py-2 text-xs uppercase tracking-widest">Book</button>
+        </div>
     </nav>
 
     <!-- HERO SECTION -->
     <header class="relative h-screen flex items-center justify-center lg:justify-start lg:pl-40 overflow-hidden">
         
-        <!-- 1. HERO IMAGE (HTML TAG) -->
-        <!-- Change the 'src' below to replace your image -->
+        <!-- HERO IMAGE -->
         <img src="hero_bg.jpg" 
              alt="Walkerbay Hero Background" 
              class="absolute inset-0 w-full h-full object-cover z-0"
-             onerror="this.style.backgroundColor='#002B5B'">
+             onerror="this.style.backgroundColor='var(--color-primary)'">
         
-        <!-- Gradient Overlay for text readability -->
         <div class="absolute inset-0 bg-gradient-to-r from-deepBlue/90 via-deepBlue/50 to-transparent z-10"></div>
         
-        <!-- Content -->
         <div class="relative z-20 text-white max-w-4xl px-6 reveal-up active">
             <div class="flex items-center gap-4 mb-6">
                 <span class="h-[1px] w-12 bg-accentGold"></span>
@@ -119,15 +200,15 @@
             <p class="max-w-md font-light text-lg mb-10 text-gray-200">
                 A sanctuary on Lake Victoria. Immerse yourself in our curated 3-Day Holiday Package.
             </p>
-            <div class="flex gap-6">
-                <a href="#intro-video" class="group flex items-center gap-3 uppercase text-xs tracking-widest hover:text-accentGold transition">
-                    <div class="w-10 h-10 rounded-full border border-white flex items-center justify-center group-hover:border-accentGold">
-                        <i class="fas fa-play ml-1"></i>
-                    </div>
-                    Watch Film
-                </a>
-                <a href="https://wa.me/254700346672?text=I%20am%20interested%20in%20booking." class="bg-white text-deepBlue px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-accentGold hover:text-white transition">
-                    Book Now
+            <div class="flex flex-wrap gap-6">
+                <!-- Stylish Button 1 -->
+                <button onclick="openModal()" class="btn-artistic bg-white text-deepBlue px-10 py-4 text-xs font-bold uppercase tracking-widest border border-white">
+                    Book Your Stay
+                </button>
+                
+                <!-- Stylish Call Button (Hero) -->
+                <a href="tel:+254700346672" class="btn-artistic bg-transparent text-white border border-white px-10 py-4 text-xs font-bold uppercase tracking-widest hover:border-accentGold">
+                    <i class="fas fa-phone-alt mr-2"></i> Call Now
                 </a>
             </div>
         </div>
@@ -157,7 +238,6 @@
                         
                         <div class="flex items-center gap-6">
                             <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-accentGold p-1">
-                                <!-- FOUNDER IMAGE -->
                                 <img src="ceo_victor.jpg" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover rounded-full grayscale">
                             </div>
                             <div>
@@ -168,7 +248,7 @@
                     </div>
                 </div>
 
-                <!-- VIDEO 1: INTRO -->
+                <!-- VIDEO 1 -->
                 <div class="lg:col-span-7 reveal-up">
                     <div class="relative left-0 lg:-left-12 top-10 shadow-2xl z-20 border-8 border-white">
                         <video class="w-full h-[400px] object-cover" controls poster="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
@@ -189,7 +269,6 @@
             </div>
 
             <div class="relative">
-                <!-- Timeline Line -->
                 <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-[1px] bg-gray-300 hidden md:block"></div>
 
                 <!-- Day 1 -->
@@ -249,7 +328,6 @@
     <!-- SECTION 3: VIDEO 2 (ADVENTURE) -->
     <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <!-- Adventure Video Background -->
             <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1544551763-46a8723ba3f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
                 <source src="adventure_video.mp4" type="video/mp4">
             </video>
@@ -259,12 +337,14 @@
         <div class="relative z-10 text-center text-white p-6 reveal-up border border-white/30 backdrop-blur-sm p-12 max-w-2xl">
             <h3 class="font-serif text-5xl md:text-7xl mb-6">Wild & Free</h3>
             <p class="font-light text-lg mb-8">Speedboats. Caves. Mwarache Hills.</p>
-            <a href="https://wa.me/254700346672" class="inline-block border-b border-accentGold pb-1 hover:text-accentGold transition uppercase tracking-widest text-sm">Start Your Adventure</a>
+            <button onclick="openModal('Full Package')" class="btn-artistic bg-transparent border border-white text-white px-8 py-3 uppercase tracking-widest text-sm hover:border-accentGold">
+                Start Your Adventure
+            </button>
         </div>
     </section>
 
     <!-- SECTION 4: ACCOMMODATION -->
-    <section id="rooms" class="py-32 bg-deepBlue text-white relative pl-0 lg:pl-20">
+    <section id="rooms" class="py-32 bg-deepBlue text-white relative pl-0 lg:pl-20 transition-colors duration-500">
         <div class="watermark bottom-0 left-0 text-white opacity-[0.02]">REST</div>
         
         <div class="container mx-auto px-6 relative z-10">
@@ -284,9 +364,11 @@
                         <h4 class="font-serif text-3xl">Lakeside Comfort</h4>
                         <span class="text-accentGold font-serif text-2xl">KSh 1,500</span>
                     </div>
-                    <div class="flex justify-between text-sm text-gray-400 font-light">
+                    <div class="flex justify-between text-sm text-gray-400 font-light items-center">
                         <span>Single Occupancy</span>
-                        <a href="https://wa.me/254700346672?text=Book%20Standard" class="text-white border-b border-transparent group-hover:border-white transition">Book Now <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
+                        <button onclick="openModal('Standard Room')" class="btn-artistic bg-white text-deepBlue px-6 py-2 text-xs font-bold uppercase">
+                            Book Now
+                        </button>
                     </div>
                 </div>
 
@@ -300,9 +382,11 @@
                         <h4 class="font-serif text-3xl">Muhuru Luxury</h4>
                         <span class="text-accentGold font-serif text-2xl">KSh 2,000</span>
                     </div>
-                    <div class="flex justify-between text-sm text-gray-400 font-light">
+                    <div class="flex justify-between text-sm text-gray-400 font-light items-center">
                         <span>Single Occupancy</span>
-                        <a href="https://wa.me/254700346672?text=Book%20Suite" class="text-white border-b border-transparent group-hover:border-white transition">Book Now <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
+                        <button onclick="openModal('Suite Room')" class="btn-artistic bg-accentGold text-deepBlue px-6 py-2 text-xs font-bold uppercase">
+                            Book Now
+                        </button>
                     </div>
                 </div>
             </div>
@@ -374,7 +458,7 @@
                     <ul class="space-y-4">
                         <li><a href="#rooms" class="hover:text-white transition">Stay</a></li>
                         <li><a href="#itinerary" class="hover:text-white transition">Explore</a></li>
-                        <li><a href="https://wa.me/254700346672" class="hover:text-white transition">Contact</a></li>
+                        <li><button onclick="openModal()" class="hover:text-white transition text-left">Contact</button></li>
                     </ul>
                 </div>
             </div>
@@ -386,25 +470,136 @@
         </div>
     </footer>
 
+    <!-- BOOKING MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden-modal backdrop-blur-md bg-deepBlue/60">
+        <div class="bg-white/95 backdrop-blur-xl p-8 md:p-12 w-full max-w-lg shadow-2xl relative border-t-4 border-accentGold rounded-lg">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition text-2xl">&times;</button>
+            
+            <h3 class="font-serif text-3xl text-deepBlue mb-2">Reserve Your Stay</h3>
+            <p class="text-gray-500 text-sm mb-6">Complete the details below to start your booking via WhatsApp.</p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Your Name</label>
+                    <input type="text" id="guest-name" class="w-full bg-white border border-gray-300 p-3 focus:border-accentGold focus:outline-none transition rounded" placeholder="John Doe">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Check-in</label>
+                        <input type="date" id="checkin-date" class="w-full bg-white border border-gray-300 p-3 focus:border-accentGold focus:outline-none transition rounded">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Check-out</label>
+                        <input type="date" id="checkout-date" class="w-full bg-white border border-gray-300 p-3 focus:border-accentGold focus:outline-none transition rounded">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Room Type</label>
+                        <select id="room-type" class="w-full bg-white border border-gray-300 p-3 focus:border-accentGold focus:outline-none transition rounded">
+                            <option value="General Inquiry">Select Room</option>
+                            <option value="Standard Room">Standard Room</option>
+                            <option value="Suite Room">Suite Room</option>
+                            <option value="Full Package">Full Holiday Package</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Guests</label>
+                        <input type="number" id="guest-count" min="1" value="2" class="w-full bg-white border border-gray-300 p-3 focus:border-accentGold focus:outline-none transition rounded">
+                    </div>
+                </div>
+
+                <button onclick="sendWhatsAppBooking()" class="btn-artistic w-full bg-deepBlue text-white py-4 font-bold uppercase tracking-widest hover:bg-accentGold transition mt-4 rounded shadow-lg">
+                    Confirm via WhatsApp <i class="fab fa-whatsapp ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
+        // --- 1. Theme Switcher Logic ---
+        const themes = ['royal', 'midnight', 'ocean'];
+        let currentThemeIndex = 0;
+
+        function toggleTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const newTheme = themes[currentThemeIndex];
+            document.body.setAttribute('data-theme', newTheme);
+        }
+
+        // --- 2. Button Magnetic Effect Logic ---
+        const btns = document.querySelectorAll('.btn-artistic');
+        btns.forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Slight move of the button (magnetic)
+                const moveX = (x - rect.width / 2) / 10;
+                const moveY = (y - rect.height / 2) / 10;
+                
+                btn.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                btn.style.transform = `translate(0, 0) scale(1)`;
+            });
+        });
+
+
+        // --- 3. Modal & Booking Logic ---
+        function openModal(preselectedRoom = null) {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.remove('hidden-modal');
+            modal.classList.add('visible-modal');
+            
+            if (preselectedRoom) {
+                document.getElementById('room-type').value = preselectedRoom;
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.remove('visible-modal');
+            modal.classList.add('hidden-modal');
+        }
+
+        document.getElementById('booking-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        function sendWhatsAppBooking() {
+            const name = document.getElementById('guest-name').value;
+            const checkin = document.getElementById('checkin-date').value;
+            const checkout = document.getElementById('checkout-date').value;
+            const room = document.getElementById('room-type').value;
+            const guests = document.getElementById('guest-count').value;
+
+            if (!name) { alert("Please enter your name."); return; }
+
+            let message = `Hello Walkerbay Hotels, I would like to make a reservation.%0A%0A`;
+            message += `*Guest Name:* ${name}%0A`;
+            message += `*Room Preference:* ${room}%0A`;
+            message += `*Number of Guests:* ${guests}%0A`;
+            message += (checkin && checkout) ? `*Dates:* ${checkin} to ${checkout}%0A` : `*Dates:* (Dates not specified)%0A`;
+            message += `%0APlease confirm availability and rates.`;
+
+            window.open(`https://wa.me/254700346672?text=${message}`, '_blank');
+        }
+
+        // --- 4. Scroll Reveal ---
         document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('active');
                 });
-            }, observerOptions);
+            }, { threshold: 0.15 });
 
-            const revealElements = document.querySelectorAll('.reveal-up');
-            revealElements.forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
         });
     </script>
 </body>
