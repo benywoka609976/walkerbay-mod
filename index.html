@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walkerbay Hotels | Muhuru Bay Luxury</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Theme Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        walkerBlue: '#002B5B', // Royal Deep Blue
+                        walkerDark: '#001a38',
+                        walkerLight: '#F4F8FB', // Soft Blue-White
+                        walkerGold: '#C5A059', // Elegant Gold
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- CUSTOM STYLES --- */
+        
+        /* The Main Background Image */
+        .hero-bg {
+            /* 
+               IMPORTANT: Ensure your image file is named 'hotel_main_bg.jpg' 
+               and is in the same folder as this file.
+            */
+            background-image: linear-gradient(rgba(0, 43, 91, 0.5), rgba(0, 43, 91, 0.3)), url('hotel_main_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
+            background-repeat: no-repeat;
+        }
+
+        /* If the image isn't found, fallback to a color */
+        .hero-bg-fallback {
+            background-color: #002B5B;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glassmorphism */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Image Hover Zoom */
+        .img-zoom-wrap {
+            overflow: hidden;
+        }
+        .img-zoom-wrap img {
+            transition: transform 0.7s ease;
+        }
+        .img-zoom-wrap:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-walkerLight text-gray-700 antialiased selection:bg-walkerGold selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-white font-serif text-3xl font-bold tracking-wider uppercase drop-shadow-md group">
+                Walkerbay<span class="text-walkerGold group-hover:text-white transition">.</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-10 text-white text-xs tracking-[0.2em] font-bold uppercase">
+                <a href="#package" class="hover:text-walkerGold transition relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-0.5 after:bg-walkerGold after:transition-all hover:after:w-full">Itinerary</a>
+                <a href="#rooms" class="hover:text-walkerGold transition relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-0.5 after:bg-walkerGold after:transition-all hover:after:w-full">Stay</a>
+                <a href="#dining" class="hover:text-walkerGold transition relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-0.5 after:bg-walkerGold after:transition-all hover:after:w-full">Dining</a>
+                <a href="#contact" class="hover:text-walkerGold transition relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-0.5 after:bg-walkerGold after:transition-all hover:after:w-full">Contact</a>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="https://wa.me/254700346672?text=Hello%20Walkerbay,%20I%20would%20like%20to%20make%20a%20reservation." 
+               target="_blank"
+               class="hidden md:inline-block bg-walkerGold text-white px-8 py-3 rounded-none uppercase text-xs font-bold tracking-widest hover:bg-white hover:text-walkerBlue transition duration-300 shadow-lg border border-transparent hover:border-walkerBlue">
+                Book Now
+            </a>
+
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen hero-bg hero-bg-fallback flex items-center justify-center text-center text-white px-4">
+        <div class="absolute inset-0 bg-black/20"></div> <!-- Overlay for readability -->
+        
+        <div class="relative z-10 max-w-5xl mx-auto reveal active">
+            <div class="mb-6 flex items-center justify-center gap-4">
+                <div class="h-[1px] w-12 bg-walkerGold"></div>
+                <p class="text-walkerGold text-sm md:text-base tracking-[0.4em] uppercase font-bold">Muhuru Bay • Kenya</p>
+                <div class="h-[1px] w-12 bg-walkerGold"></div>
+            </div>
+            
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-9xl mb-8 leading-tight drop-shadow-2xl">
+                Coastal<br><span class="italic font-light">Elegance</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl mb-12 font-light max-w-2xl mx-auto text-gray-100">
+                Experience the magic of Lake Victoria with our exclusive 3-Day Holiday Package. Luxury accommodation, island excursions, and fine dining await.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#package" class="bg-transparent border border-white text-white px-10 py-4 hover:bg-white hover:text-walkerBlue transition duration-300 uppercase tracking-widest text-sm font-bold">
+                    View Package
+                </a>
+                <a href="https://wa.me/254700346672" target="_blank" class="bg-walkerBlue border border-walkerBlue text-white px-10 py-4 hover:bg-walkerGold hover:border-walkerGold transition duration-300 uppercase tracking-widest text-sm font-bold">
+                    <i class="fab fa-whatsapp mr-2"></i> Plan Trip
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/70">
+            <span class="text-xs tracking-widest uppercase mb-2 block">Scroll</span>
+            <i class="fas fa-chevron-down text-xl"></i>
+        </div>
+    </header>
+
+    <!-- Introduction -->
+    <section class="py-24 bg-white relative">
+        <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-100 to-white opacity-50"></div>
+        <div class="container mx-auto px-6 text-center reveal">
+            <span class="text-walkerGold font-serif italic text-2xl mb-2 block">Welcome to</span>
+            <h2 class="text-walkerBlue font-serif text-4xl md:text-5xl mb-8 uppercase tracking-wide">Walkerbay Hotels</h2>
+            <div class="w-16 h-1 bg-walkerGold mx-auto mb-10"></div>
+            <p class="max-w-3xl mx-auto text-lg leading-relaxed text-gray-600 font-light">
+                Guests will be warmly welcomed to Walkerbay Hotels for an orientation into relaxation. 
+                Nestled on the shores of Lake Victoria, we offer a sanctuary where the rhythm of the waves sets the pace of your day. 
+                From our <strong>Standard</strong> and <strong>Suite</strong> rooms to our curated island excursions, every detail is designed for your comfort.
+            </p>
+        </div>
+    </section>
+
+    <!-- The 3-Day Package (Itinerary) -->
+    <section id="package" class="py-24 bg-walkerLight relative overflow-hidden">
+        <!-- Decorative Background Element -->
+        <div class="absolute -right-20 top-40 text-[20rem] text-gray-200 font-serif opacity-20 pointer-events-none select-none">3</div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h3 class="text-walkerBlue font-serif text-4xl md:text-5xl">The Holiday Package</h3>
+                    <p class="text-walkerGold mt-3 uppercase tracking-widest font-bold text-sm">3 Days • 2 Nights • Endless Memories</p>
+                </div>
+                <div class="hidden md:block">
+                    <a href="https://wa.me/254700346672" class="text-walkerBlue hover:text-walkerGold underline underline-offset-4 transition">Inquire Availability <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+            </div>
+
+            <!-- Timeline / Grid -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <!-- Day 1 Card -->
+                <div class="group bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition duration-500 reveal">
+                    <div class="h-64 img-zoom-wrap relative">
+                        <div class="absolute top-4 left-4 bg-walkerBlue text-white px-4 py-1 text-xs font-bold uppercase z-10">Day 01</div>
+                        <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Arrival" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-500"></div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-serif text-2xl text-walkerBlue mb-2">Arrival & Orientation</h4>
+                        <div class="w-12 h-0.5 bg-walkerGold mb-4"></div>
+                        <ul class="text-sm text-gray-600 space-y-3 mb-6">
+                            <li class="flex"><i class="fas fa-check text-walkerGold mt-1 mr-3"></i> <span><strong>Lunch:</strong> Sandwiches, fruit & fresh juice.</span></li>
+                            <li class="flex"><i class="fas fa-check text-walkerGold mt-1 mr-3"></i> <span><strong>Dinner:</strong> Fresh Lake Victoria fish & traditional greens.</span></li>
+                            <li class="flex"><i class="fas fa-check text-walkerGold mt-1 mr-3"></i> <span><strong>Evening:</strong> Complimentary tea/coffee by the beach.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 2 Card -->
+                <div class="group bg-walkerBlue text-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition duration-500 transform lg:-translate-y-6 reveal">
+                    <div class="h-64 img-zoom-wrap relative">
+                        <div class="absolute top-4 left-4 bg-walkerGold text-walkerBlue px-4 py-1 text-xs font-bold uppercase z-10">Day 02</div>
+                        <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Island Excursion" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-serif text-2xl text-white mb-2">Island Excursion</h4>
+                        <div class="w-12 h-0.5 bg-walkerGold mb-4"></div>
+                        <p class="text-sm text-gray-300 mb-4 italic">Ongwe Island • Mwarache Hills • Olktigla Island</p>
+                        <ul class="text-sm text-gray-300 space-y-3 mb-6">
+                            <li class="flex"><i class="fas fa-water mt-1 mr-3"></i> <span>Speedboat rides with morning snacks.</span></li>
+                            <li class="flex"><i class="fas fa-utensils mt-1 mr-3"></i> <span><strong>Picnic Lunch:</strong> Fried fish & salad on Olktigla Island.</span></li>
+                            <li class="flex"><i class="fas fa-sun mt-1 mr-3"></i> <span>Sunset beach walk & local delicacy dinner.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 3 Card -->
+                <div class="group bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition duration-500 reveal">
+                    <div class="h-64 img-zoom-wrap relative">
+                        <div class="absolute top-4 left-4 bg-walkerBlue text-white px-4 py-1 text-xs font-bold uppercase z-10">Day 03</div>
+                        <img src="https://images.unsplash.com/photo-1533929736472-594e69d8cf3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Caves" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-500"></div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-serif text-2xl text-walkerBlue mb-2">Caves & Departure</h4>
+                        <div class="w-12 h-0.5 bg-walkerGold mb-4"></div>
+                        <ul class="text-sm text-gray-600 space-y-3 mb-6">
+                            <li class="flex"><i class="fas fa-check text-walkerGold mt-1 mr-3"></i> <span>Explore the fascinating <strong>Mugabo Caves</strong>.</span></li>
+                            <li class="flex"><i class="fas fa-check text-walkerGold mt-1 mr-3"></i> <span>Enjoy Senye Sandy Beach.</span></li>
+                            <li class="flex"><i class="fas fa-check text-walkerGold mt-1 mr-3"></i> <span>Guided walk through Muhuru town.</span></li>
+                            <li class="flex"><i class="fas fa-check text-walkerGold mt-1 mr-3"></i> <span><strong>Dinner:</strong> Hearty stew with rice/ugali.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Activity Banner -->
+    <section class="relative py-32 bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 bg-walkerBlue/80 mix-blend-multiply"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center text-white reveal">
+            <h3 class="font-serif text-5xl mb-12">Included Adventures</h3>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 border border-white/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-walkerBlue transition duration-500">
+                        <i class="fas fa-ship text-3xl"></i>
+                    </div>
+                    <span class="font-bold tracking-widest text-sm uppercase">Speedboats</span>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 border border-white/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-walkerBlue transition duration-500">
+                        <i class="fas fa-mountain text-3xl"></i>
+                    </div>
+                    <span class="font-bold tracking-widest text-sm uppercase">Caves</span>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 border border-white/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-walkerBlue transition duration-500">
+                        <i class="fas fa-binoculars text-3xl"></i>
+                    </div>
+                    <span class="font-bold tracking-widest text-sm uppercase">Mwarache Hills</span>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 border border-white/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-walkerBlue transition duration-500">
+                        <i class="fas fa-fish text-3xl"></i>
+                    </div>
+                    <span class="font-bold tracking-widest text-sm uppercase">Fishing (Add-on)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodation -->
+    <section id="rooms" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-gray-400 uppercase tracking-widest text-sm font-bold">Sleep in Comfort</span>
+                <h3 class="text-walkerBlue font-serif text-5xl mt-2">Accommodation</h3>
+                <div class="w-24 h-1 bg-walkerGold mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Standard Room -->
+                <div class="group bg-white border border-gray-100 hover:border-walkerGold/50 transition duration-300 rounded-lg overflow-hidden reveal">
+                    <div class="h-72 img-zoom-wrap w-full relative">
+                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 bg-white/90 backdrop-blur px-6 py-2">
+                            <span class="text-walkerBlue font-bold uppercase tracking-widest text-xs">Standard Room</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-baseline mb-4">
+                            <h4 class="font-serif text-2xl text-walkerBlue">Relaxed Living</h4>
+                            <div class="text-right">
+                                <span class="block text-xl font-bold text-walkerGold">KSh 1,500</span>
+                                <span class="text-xs text-gray-400">Single / Night</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 mb-6 font-light">A cozy retreat perfect for solo travelers or couples. Includes all essential amenities.</p>
+                        
+                        <div class="bg-gray-50 p-4 rounded mb-6 grid grid-cols-2 gap-4 text-sm text-gray-600">
+                            <div><i class="fas fa-user text-walkerGold mr-2"></i> Single: KSh 1,500</div>
+                            <div><i class="fas fa-user-friends text-walkerGold mr-2"></i> Double: KSh 2,000</div>
+                        </div>
+
+                        <a href="https://wa.me/254700346672?text=I%20am%20interested%20in%20booking%20a%20Standard%20Room" target="_blank" class="block w-full text-center border border-walkerBlue text-walkerBlue py-3 uppercase text-xs font-bold tracking-widest hover:bg-walkerBlue hover:text-white transition">
+                            Book Standard
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Suite Room -->
+                <div class="group bg-white border border-gray-100 hover:border-walkerGold/50 transition duration-300 rounded-lg overflow-hidden reveal">
+                    <div class="h-72 img-zoom-wrap w-full relative">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 bg-walkerGold text-white px-6 py-2">
+                            <span class="font-bold uppercase tracking-widest text-xs">Suite Room</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-baseline mb-4">
+                            <h4 class="font-serif text-2xl text-walkerBlue">Premium Comfort</h4>
+                            <div class="text-right">
+                                <span class="block text-xl font-bold text-walkerGold">KSh 2,000</span>
+                                <span class="text-xs text-gray-400">Single / Night</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 mb-6 font-light">Spacious and elegant, featuring premium furnishings for an elevated experience.</p>
+                        
+                        <div class="bg-gray-50 p-4 rounded mb-6 grid grid-cols-2 gap-4 text-sm text-gray-600">
+                            <div><i class="fas fa-user text-walkerGold mr-2"></i> Single: KSh 2,000</div>
+                            <div><i class="fas fa-user-friends text-walkerGold mr-2"></i> Double: KSh 2,500</div>
+                        </div>
+
+                        <a href="https://wa.me/254700346672?text=I%20am%20interested%20in%20booking%20a%20Suite%20Room" target="_blank" class="block w-full text-center bg-walkerBlue text-white py-3 uppercase text-xs font-bold tracking-widest hover:bg-walkerGold hover:text-walkerBlue transition">
+                            Book Suite
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center text-gray-400 text-sm mt-10 italic">* Breakfast charged separately for 'Bed Only' rates (KSh 6,000/day for groups).</p>
+        </div>
+    </section>
+
+    <!-- Dining Section -->
+    <section id="dining" class="py-24 bg-walkerDark text-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal">
+                    <span class="text-walkerGold font-serif italic text-2xl mb-2 block">Culinary Delights</span>
+                    <h3 class="font-serif text-5xl mb-6">Buffet Dining</h3>
+                    <p class="text-gray-300 leading-relaxed mb-8">
+                        Savor the authentic tastes of the region. Our buffet meals are prepared fresh daily, catering to groups of 11 guests. 
+                        Enjoy fresh Tilapia, traditional Kienyeji vegetables, and hearty Ugali.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-walkerGold text-xl mr-4"><i class="fas fa-coffee"></i></div>
+                            <div>
+                                <h5 class="font-bold text-lg">Breakfast</h5>
+                                <p class="text-sm text-gray-400">Eggs, pancakes, sausages, fresh fruit & hot chocolate.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-walkerGold text-xl mr-4"><i class="fas fa-utensils"></i></div>
+                            <div>
+                                <h5 class="font-bold text-lg">Lunch & Dinner</h5>
+                                <p class="text-sm text-gray-400">Fresh fish/beef, kales, rice/pilau, and dessert.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 relative reveal">
+                    <!-- Artful Image Composition -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="rounded-lg opacity-80 hover:opacity-100 transition duration-500 translate-y-8">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="rounded-lg opacity-80 hover:opacity-100 transition duration-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black text-white pt-20 border-t border-gray-800">
+        <div class="container mx-auto px-6 pb-12">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="md:col-span-2">
+                    <h4 class="font-serif text-3xl mb-6">Walkerbay Hotels</h4>
+                    <p class="text-gray-400 max-w-sm mb-6">A luxurious escape in Muhuru Bay. We provide the perfect blend of adventure and relaxation on the shores of Lake Victoria.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 border border-gray-700 rounded-full flex items-center justify-center hover:bg-walkerGold hover:border-walkerGold hover:text-walkerBlue transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 border border-gray-700 rounded-full flex items-center justify-center hover:bg-walkerGold hover:border-walkerGold hover:text-walkerBlue transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 border border-gray-700 rounded-full flex items-center justify-center hover:bg-walkerGold hover:border-walkerGold hover:text-walkerBlue transition"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold text-walkerGold uppercase tracking-widest mb-6 text-sm">Contact</h5>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-phone-alt w-6"></i> +254 700 346 672</li>
+                        <li class="flex items-center"><i class="fas fa-envelope w-6"></i> reservations@walkerbayhotels.com</li>
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt w-6"></i> Muhuru Bay, Lake Victoria</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-walkerGold uppercase tracking-widest mb-6 text-sm">Information</h5>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Excursions</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-gray-900 py-6 text-center text-xs text-gray-500 uppercase tracking-widest">
+            &copy; 2023 Walkerbay Hotels. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        const logoText = navbar.querySelector('a');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-walkerBlue', 'shadow-lg', 'py-4');
+                navbar.classList.remove('py-6');
+            } else {
+                navbar.classList.remove('bg-walkerBlue', 'shadow-lg', 'py-4');
+                navbar.classList.add('py-6');
+            }
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+    </script>
+</body>
+</html>
