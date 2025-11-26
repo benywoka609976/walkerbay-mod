@@ -68,7 +68,6 @@
             z-index: 1;
         }
         
-        /* The sliding background effect */
         .btn-artistic::before {
             content: '';
             position: absolute;
@@ -150,7 +149,7 @@
         </button>
     </div>
 
-    <!-- FLOATING CALL BUTTON (Mobile/Desktop) -->
+    <!-- FLOATING CALL BUTTON -->
     <a href="tel:+254700346672" class="fixed bottom-6 right-6 z-[60] w-16 h-16 bg-accentGold rounded-full flex items-center justify-center text-white shadow-2xl floating-fab hover:scale-110 transition duration-300">
         <i class="fas fa-phone-alt text-2xl"></i>
     </a>
@@ -160,8 +159,8 @@
         <div class="text-deepBlue font-bold font-serif text-2xl tracking-widest">WB</div>
         <div class="flex flex-col gap-8 items-center">
             <a href="#rooms" class="text-vertical text-xs uppercase tracking-widest hover:text-accentGold transition py-4">Stay</a>
+            <a href="#gallery" class="text-vertical text-xs uppercase tracking-widest hover:text-accentGold transition py-4">Gallery</a>
             <a href="#itinerary" class="text-vertical text-xs uppercase tracking-widest hover:text-accentGold transition py-4">Explore</a>
-            <a href="#dining" class="text-vertical text-xs uppercase tracking-widest hover:text-accentGold transition py-4">Taste</a>
         </div>
         <div class="flex flex-col gap-4 text-deepBlue">
             <a href="#" class="hover:text-accentGold"><i class="fab fa-instagram"></i></a>
@@ -180,8 +179,6 @@
 
     <!-- HERO SECTION -->
     <header class="relative h-screen flex items-center justify-center lg:justify-start lg:pl-40 overflow-hidden">
-        
-        <!-- HERO IMAGE -->
         <img src="hero_bg.jpg" 
              alt="Walkerbay Hero Background" 
              class="absolute inset-0 w-full h-full object-cover z-0"
@@ -201,20 +198,13 @@
                 A sanctuary on Lake Victoria. Immerse yourself in our curated 3-Day Holiday Package.
             </p>
             <div class="flex flex-wrap gap-6">
-                <!-- Stylish Button 1 -->
                 <button onclick="openModal()" class="btn-artistic bg-white text-deepBlue px-10 py-4 text-xs font-bold uppercase tracking-widest border border-white">
                     Book Your Stay
                 </button>
-                
-                <!-- Stylish Call Button (Hero) -->
                 <a href="tel:+254700346672" class="btn-artistic bg-transparent text-white border border-white px-10 py-4 text-xs font-bold uppercase tracking-widest hover:border-accentGold">
                     <i class="fas fa-phone-alt mr-2"></i> Call Now
                 </a>
             </div>
-        </div>
-
-        <div class="absolute bottom-0 right-0 p-10 hidden lg:block text-white/20 font-serif text-9xl leading-none select-none z-10">
-            01
         </div>
     </header>
 
@@ -224,8 +214,6 @@
 
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Founder -->
                 <div class="lg:col-span-5 reveal-up">
                     <div class="relative">
                         <div class="absolute -left-10 top-0 h-full w-[1px] bg-accentGold"></div>
@@ -235,7 +223,6 @@
                             It is not just a hotel; it is a canvas where the water meets the sky. 
                             I invite you to pause, breathe, and let the rhythm of Muhuru Bay restore your spirit."
                         </p>
-                        
                         <div class="flex items-center gap-6">
                             <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-accentGold p-1">
                                 <img src="ceo_victor.jpg" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover rounded-full grayscale">
@@ -247,8 +234,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- VIDEO 1 -->
                 <div class="lg:col-span-7 reveal-up">
                     <div class="relative left-0 lg:-left-12 top-10 shadow-2xl z-20 border-8 border-white">
                         <video class="w-full h-[400px] object-cover" controls poster="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
@@ -271,12 +256,11 @@
             <div class="relative">
                 <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-[1px] bg-gray-300 hidden md:block"></div>
 
-                <!-- Day 1 -->
                 <div class="flex flex-col md:flex-row items-center justify-between mb-24 reveal-up">
                     <div class="md:w-5/12 text-right order-2 md:order-1 pr-0 md:pr-12">
                         <h4 class="font-serif text-4xl text-deepBlue">Arrival</h4>
                         <p class="text-accentGold font-bold text-xs uppercase tracking-widest mb-4">Day 01 • Orientation</p>
-                        <p class="text-gray-600 font-light text-sm">Light lunch on arrival followed by a Buffet Dinner featuring fresh Lake Victoria fish and traditional greens. Evening tea by the beach.</p>
+                        <p class="text-gray-600 font-light text-sm">Light lunch on arrival followed by a Buffet Dinner featuring fresh Lake Victoria fish.</p>
                     </div>
                     <div class="md:w-2/12 flex justify-center order-1 md:order-2 mb-6 md:mb-0 relative">
                         <div class="w-4 h-4 bg-deepBlue rounded-full ring-8 ring-softWhite z-10"></div>
@@ -288,7 +272,6 @@
                     </div>
                 </div>
 
-                <!-- Day 2 -->
                 <div class="flex flex-col md:flex-row items-center justify-between mb-24 reveal-up">
                     <div class="md:w-5/12 order-3 md:order-1 pr-0 md:pr-12">
                          <div class="image-hover-zoom w-full h-64 overflow-hidden relative shadow-lg">
@@ -301,16 +284,15 @@
                     <div class="md:w-5/12 text-left order-2 md:order-3 pl-0 md:pl-12">
                         <h4 class="font-serif text-4xl text-deepBlue">Island Safari</h4>
                         <p class="text-accentGold font-bold text-xs uppercase tracking-widest mb-4">Day 02 • Adventure</p>
-                        <p class="text-gray-600 font-light text-sm">Speedboat rides to Ongwe Island & Mwarache Hills. Picnic lunch on Olktigla Island followed by a sunset beach walk.</p>
+                        <p class="text-gray-600 font-light text-sm">Speedboat rides to Ongwe Island & Mwarache Hills. Picnic lunch on Olktigla Island.</p>
                     </div>
                 </div>
 
-                <!-- Day 3 -->
                 <div class="flex flex-col md:flex-row items-center justify-between reveal-up">
                     <div class="md:w-5/12 text-right order-2 md:order-1 pr-0 md:pr-12">
                         <h4 class="font-serif text-4xl text-deepBlue">The Ancient Caves</h4>
                         <p class="text-accentGold font-bold text-xs uppercase tracking-widest mb-4">Day 03 • Culture</p>
-                        <p class="text-gray-600 font-light text-sm">Explore the mysterious Mugabo Caves and relax at Senye Sandy Beach. Includes a guided town walk and farewell stew dinner.</p>
+                        <p class="text-gray-600 font-light text-sm">Explore the mysterious Mugabo Caves and relax at Senye Sandy Beach.</p>
                     </div>
                     <div class="md:w-2/12 flex justify-center order-1 md:order-2 mb-6 md:mb-0 relative">
                         <div class="w-4 h-4 bg-deepBlue rounded-full ring-8 ring-softWhite z-10"></div>
@@ -325,7 +307,7 @@
         </div>
     </section>
 
-    <!-- SECTION 3: VIDEO 2 (ADVENTURE) -->
+    <!-- SECTION 3: VIDEO 2 -->
     <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1544551763-46a8723ba3f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
@@ -333,7 +315,6 @@
             </video>
             <div class="absolute inset-0 bg-black/40"></div>
         </div>
-        
         <div class="relative z-10 text-center text-white p-6 reveal-up border border-white/30 backdrop-blur-sm p-12 max-w-2xl">
             <h3 class="font-serif text-5xl md:text-7xl mb-6">Wild & Free</h3>
             <p class="font-light text-lg mb-8">Speedboats. Caves. Mwarache Hills.</p>
@@ -346,15 +327,12 @@
     <!-- SECTION 4: ACCOMMODATION -->
     <section id="rooms" class="py-32 bg-deepBlue text-white relative pl-0 lg:pl-20 transition-colors duration-500">
         <div class="watermark bottom-0 left-0 text-white opacity-[0.02]">REST</div>
-        
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16">
                 <h3 class="font-serif text-5xl">The <span class="text-accentGold italic">Suites</span></h3>
                 <p class="text-sm font-light text-gray-400 mt-4 md:mt-0">Sanctuaries designed for deep rest.</p>
             </div>
-
             <div class="grid lg:grid-cols-2 gap-16">
-                <!-- Room 1 -->
                 <div class="group reveal-up">
                     <div class="relative h-80 w-full overflow-hidden mb-6">
                         <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
@@ -371,8 +349,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Room 2 -->
                 <div class="group reveal-up transition-delay-200">
                     <div class="relative h-80 w-full overflow-hidden mb-6">
                         <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
@@ -390,24 +366,18 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="mt-12 text-center">
-                 <p class="text-xs uppercase tracking-widest text-gray-500">* Breakfast charged separately for 'Bed Only' rates.</p>
-            </div>
         </div>
     </section>
 
     <!-- SECTION 5: DINING & VIDEO 3 -->
     <section id="dining" class="bg-white pl-0 lg:pl-20">
         <div class="grid lg:grid-cols-2">
-            <!-- Content -->
             <div class="p-12 lg:p-24 flex flex-col justify-center reveal-up">
                 <span class="text-accentGold font-serif italic text-2xl mb-4">Culinary Art</span>
                 <h3 class="font-serif text-5xl text-deepBlue mb-8">Flavors of the Lake</h3>
                 <p class="text-gray-600 font-light leading-relaxed mb-10">
                     Dining at Walkerbay is a celebration of local heritage. Our buffet, prepared fresh daily, features the finest Tilapia and organic greens sourced from the village.
                 </p>
-                
                 <div class="space-y-6">
                     <div class="flex items-center gap-4 group cursor-pointer">
                         <span class="font-serif text-3xl text-gray-300 group-hover:text-accentGold transition">01</span>
@@ -425,13 +395,77 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Dining Video Loop -->
             <div class="h-[50vh] lg:h-auto relative overflow-hidden group">
                 <video class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
                     <source src="dining_video.mp4" type="video/mp4">
                 </video>
                 <div class="absolute inset-0 bg-deepBlue/20 group-hover:bg-transparent transition"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: GALLERY (10 IMAGES) -->
+    <section id="gallery" class="py-32 bg-softWhite pl-0 lg:pl-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal-up">
+                <span class="text-accentGold font-serif italic text-2xl">Visual Diary</span>
+                <h3 class="font-serif text-5xl text-deepBlue mt-2">Captured Moments</h3>
+                <div class="w-16 h-1 bg-accentGold mx-auto mt-6"></div>
+            </div>
+
+            <!-- Masonry Grid with 10 slots -->
+            <div class="columns-1 md:columns-2 lg:columns-4 gap-4 space-y-4 reveal-up">
+                
+                <!-- Gallery Image 1 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery1.jpg" onerror="this.src='https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full object-cover">
+                </div>
+
+                <!-- Gallery Image 2 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery2.jpg" onerror="this.src='https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full object-cover">
+                </div>
+
+                <!-- Gallery Image 3 (Taller placeholder) -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery3.jpg" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full h-[300px] object-cover">
+                </div>
+
+                <!-- Gallery Image 4 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery4.jpg" onerror="this.src='https://images.unsplash.com/photo-1544551763-46a8723ba3f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full object-cover">
+                </div>
+
+                <!-- Gallery Image 5 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery5.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full object-cover">
+                </div>
+
+                <!-- Gallery Image 6 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery6.jpg" onerror="this.src='https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full h-[250px] object-cover">
+                </div>
+
+                <!-- Gallery Image 7 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery7.jpg" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full object-cover">
+                </div>
+
+                <!-- Gallery Image 8 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery8.jpg" onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full object-cover">
+                </div>
+
+                <!-- Gallery Image 9 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery9.jpg" onerror="this.src='https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full h-[400px] object-cover">
+                </div>
+
+                <!-- Gallery Image 10 -->
+                <div class="break-inside-avoid rounded-lg overflow-hidden image-hover-zoom shadow-lg">
+                    <img src="gallery10.jpg" onerror="this.src='https://images.unsplash.com/photo-1533929736472-594e69d8cf3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" class="w-full object-cover">
+                </div>
+
             </div>
         </div>
     </section>
@@ -474,16 +508,13 @@
     <div id="booking-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden-modal backdrop-blur-md bg-deepBlue/60">
         <div class="bg-white/95 backdrop-blur-xl p-8 md:p-12 w-full max-w-lg shadow-2xl relative border-t-4 border-accentGold rounded-lg">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition text-2xl">&times;</button>
-            
             <h3 class="font-serif text-3xl text-deepBlue mb-2">Reserve Your Stay</h3>
             <p class="text-gray-500 text-sm mb-6">Complete the details below to start your booking via WhatsApp.</p>
-            
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Your Name</label>
                     <input type="text" id="guest-name" class="w-full bg-white border border-gray-300 p-3 focus:border-accentGold focus:outline-none transition rounded" placeholder="John Doe">
                 </div>
-                
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Check-in</label>
@@ -494,7 +525,6 @@
                         <input type="date" id="checkout-date" class="w-full bg-white border border-gray-300 p-3 focus:border-accentGold focus:outline-none transition rounded">
                     </div>
                 </div>
-
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Room Type</label>
@@ -510,7 +540,6 @@
                         <input type="number" id="guest-count" min="1" value="2" class="w-full bg-white border border-gray-300 p-3 focus:border-accentGold focus:outline-none transition rounded">
                     </div>
                 </div>
-
                 <button onclick="sendWhatsAppBooking()" class="btn-artistic w-full bg-deepBlue text-white py-4 font-bold uppercase tracking-widest hover:bg-accentGold transition mt-4 rounded shadow-lg">
                     Confirm via WhatsApp <i class="fab fa-whatsapp ml-2"></i>
                 </button>
@@ -520,46 +549,36 @@
 
     <!-- Scripts -->
     <script>
-        // --- 1. Theme Switcher Logic ---
         const themes = ['royal', 'midnight', 'ocean'];
         let currentThemeIndex = 0;
 
         function toggleTheme() {
             currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-            const newTheme = themes[currentThemeIndex];
-            document.body.setAttribute('data-theme', newTheme);
+            document.body.setAttribute('data-theme', themes[currentThemeIndex]);
         }
 
-        // --- 2. Button Magnetic Effect Logic ---
+        // Button Magnetic Effect
         const btns = document.querySelectorAll('.btn-artistic');
         btns.forEach(btn => {
             btn.addEventListener('mousemove', function(e) {
                 const rect = btn.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
-                // Slight move of the button (magnetic)
                 const moveX = (x - rect.width / 2) / 10;
                 const moveY = (y - rect.height / 2) / 10;
-                
                 btn.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
             });
-
             btn.addEventListener('mouseleave', function() {
                 btn.style.transform = `translate(0, 0) scale(1)`;
             });
         });
 
-
-        // --- 3. Modal & Booking Logic ---
+        // Booking Logic
         function openModal(preselectedRoom = null) {
             const modal = document.getElementById('booking-modal');
             modal.classList.remove('hidden-modal');
             modal.classList.add('visible-modal');
-            
-            if (preselectedRoom) {
-                document.getElementById('room-type').value = preselectedRoom;
-            }
+            if (preselectedRoom) document.getElementById('room-type').value = preselectedRoom;
         }
 
         function closeModal() {
@@ -591,7 +610,7 @@
             window.open(`https://wa.me/254700346672?text=${message}`, '_blank');
         }
 
-        // --- 4. Scroll Reveal ---
+        // Scroll Reveal
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
